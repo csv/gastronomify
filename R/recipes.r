@@ -3,11 +3,12 @@
 #' @return vector
 #' @export
 #' @examples
-#' gastronomify(
+#' data.guacamole <- gastronomify(
 #'   x = paste('Diet', ChickWeight$Diet),
 #'   y = ChickWeight$weight,
 #'   group = paste(ChickWeight$Time, 'days'),
 #'   recipe = guacamole)
+#' print(data.guacamole)
 guacamole <- c(
   avocados =              4,   # ripe medium-size avocados; Haas recommended, if available
   garlic.powder.tsp =     1/2, # teaspoon garlic powder

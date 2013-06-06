@@ -18,14 +18,15 @@
 #' @return data.frame
 #' @export
 #' @examples
-#'   recipe =  c(apples = 3, bananas = 1, cherries = 12, grapes = 14,
+#'   fruit.salad = c(apples = 3, bananas = 1, cherries = 12, grapes = 14,
 #'     kiwis = 2, lemons = 0.5, mangos = 1, nectarines = 2, oranges = 2,
 #'     pineapples = 0.5, raspberries = 8, watermelons = 0.25)
-#'   gastronomify(
+#'   data.fruit.salad <- gastronomify(
 #'     x = paste('Diet', ChickWeight$Diet),
 #'     y = ChickWeight$weight,
 #'     group = paste(ChickWeight$Time, 'days'),
-#'     recipe = recipe)
+#'     recipe = fruit.salad)
+#' print(data.fruit.salad)
 gastronomify <- function(x, y, group, recipe, inflation = 10) {
   #
   # Check inputs
@@ -51,12 +52,16 @@ gastronomify <- function(x, y, group, recipe, inflation = 10) {
     group = group
   )
 
+  # Convert the data so that the central value is 1.
   data.normalized <- dcast(data, x ~ group, value.var = 'y', fun.aggregate = mean)
   data.normalized[-1] <- data.frame(lapply(data.normalized[-1], function(vec) { vec / mean(vec) }))
-  # data.normalized[-1] <- .inflate(data[-1], inflation)
 
+  # Make it look like a recipe.
   data.recipe <- ddply(data.normalized, 'x', function(df) {df[1,-1] * truncated.recipe})
   colnames(data.recipe)[-1] <- paste(names(truncated.recipe), ' (', colnames(data.recipe[-1]), ')', sep = '')
+
+  # Inflate the variance
+  data.normalized[-1] <- .inflate(data.recipe[-1], inflation)
 
   # Remove the x column
   rownames(data.recipe) <- data.recipe[,1]
