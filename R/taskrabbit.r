@@ -12,7 +12,7 @@ handle <- function() {
 }
 
 #' Submit a task to taskrabbit.
-taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', datetime = '') {
+taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', datetime = Sys.time()) {
   curl <- handle()
   text <- httpGET('https://www.taskrabbit.com/p/tasks/new', curl = curl)
   
@@ -34,10 +34,11 @@ taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', 
     'task[id]' = '',
     'task[name]' = 'Not really a task',
     'task[category_id]' = '999',
-    'task[start_end]' = 'start_at',
-    'extra[datepicker]' = 'Friday, November 8',
-    'task[date]' = 'Friday, November 8',
-    'task[datetime]' = 'Fri Nov 08 2013 00:00:00 GMT-0800 (PST)',
+    'task[start_end]' = 'finish_by',
+    'extra[datepicker]' = strftime(datetime, format = '%A %B %d'),
+    'task[date]' = strftime(datetime, format = '%A %B %d'),
+  # 'task[datetime]' = strftime(datetime, format = '%a %b %d %Y %H:%M:%S GMT%z (%Z)'),
+    'task[datetime]' = strftime(datetime, format = '%a %b %d %Y %H:%M:%S GMT-0800 (PST)'), # only works in PST
     'task[patron_flow]' = 'general',
     'task[time]' = '',
     'task[locations_attributes][0][freeform_address]' = 'Mission Dolores Park, San Francisco, CA, United States',
