@@ -1,14 +1,25 @@
-library(plyr)
-library(reshape2)
 
 # Inflate the variation
 .inflate <- function(df, x) {
   1 + (x * (df - 1))
 }
 
+#' Turn a data frame into guacamole.
+#'
+#' This is a wrapper around \code{\link{gastronomify}}
+#' that uses the guacamole recipe from
+#' http://www.theyummylife.com/guacamole
+#'
+#' @param x 
+#' @param ... expressions evaluated in the context of \code{df} and 
+#'   then fed to \code{\link{order}}
+#' @keywords manip
+#' @export
+#' @examples
+#' mtcars[with(mtcars, order(cyl, disp)), ]
+#' arrange(mtcars, cyl, disp)
+#' arrange(mtcars, cyl, desc(disp))
 guacamole <- function(x, y, z, data, inflation = 10) {
-  # simple guacamole
-  # http://www.theyummylife.com/guacamole
   recipe <- c(
     avocados =             4,   # ripe medium-size avocados; Haas recommended, if available
     garlic.powder.tsp =    1/2, # teaspoon garlic powder
@@ -45,6 +56,18 @@ guacamole <- function(x, y, z, data, inflation = 10) {
 }
 
 
+#' Turn some data into food.
+#'
+#' @param x a factor; each level of the factor will correspond to a recipe
+#' @param y a numerical response variable, used to weight the ingredients
+#' @param group a factor used to map data to ingredients
+#' @param recipe named vector where each name is an ingredient and each
+#'   element is its quantity; its length must be the same as the number of
+#'   levels in `group`
+#' @export
+#' @examples
+#' gastronomify(x = ChickWeight$Diet, y = ChickWeight$Weight, group = ChickWeight$Time,
+#'   recipe = rnorm(length(unique(ChickWeight$Time)), mean = 10))
 gastronomify <- function(x, y, group, recipe, inflation = 10) {
   data = data.frame(
     x = x,
