@@ -32,3 +32,15 @@ test_that('This particular recipe should match.', {
   expect_that(observed[1], equals(expected[1]))
   expect_that(round(observed[-1], -5), equals(round(expected[-1], -5)))
 })
+
+test_that('Fruit salad should work.', {
+  recipe =  c(apples = 3, bananas = 1, cherries = 12, grapes = 14,
+    kiwis = 2, lemons = 0.5, mangos = 1, nectarines = 2, oranges = 2,
+    pineapples = 0.5, raspberries = 8, watermelons = 0.25)
+  observed = gastronomify(
+    x = paste('Diet', ChickWeight$Diet),
+    y = ChickWeight$weight,
+    group = paste(ChickWeight$Time, 'days'),
+    recipe = recipe)
+  expect_that(as.vector(colMeans(observed[-1])), equals(as.vector(recipe)))
+})
