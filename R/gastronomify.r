@@ -28,7 +28,7 @@
 #'     recipe = fruit.salad)
 #' print(data.fruit.salad)
 #' print(gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), recipe = c(flour = 2, water = 3)))
-gastronomify <- function(x, y, group, recipe, inflation = 10) {
+gastronomify <- function(x, y, group, data = NULL, recipe = guacamole, inflation = 10) {
   #
   # Check inputs
   #
@@ -47,14 +47,22 @@ gastronomify <- function(x, y, group, recipe, inflation = 10) {
     stop('Recipe must have at least one ingredient.')
   }
 
-  data = data.frame(
-    x = x,
-    y = y,
-    group = group
-  )
+  if (is.null(data)) {
+    data.sliced = data.frame(
+      x = x,
+      y = y,
+      group = group
+    )
+  } else {
+    data.sliced = data[c(x, y, group)]
+    colnames(data.sliced) <- c('x','y','group')
+    data.sliced$x     <- paste(x,     data.sliced$x)
+    data.sliced$group <- paste(group, data.sliced$group)
+  }
+  rm('data','x','y','group')
 
   # Convert the data so that the central value is 1.
-  data.normalized <- dcast(data, x ~ group, value.var = 'y', fun.aggregate = mean)
+  data.normalized <- dcast(data.sliced, x ~ group, value.var = 'y', fun.aggregate = mean)
   data.normalized[-1] <- data.frame(lapply(data.normalized[-1], function(vec) { vec / mean(vec) }))
 
   # Make it look like a recipe.
