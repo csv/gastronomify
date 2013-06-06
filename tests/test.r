@@ -51,3 +51,20 @@ test_that('If there are more items in the recipe than levels, truncate the recip
   b <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), recipe = c(flour = 2, water = 3, oil = 0.5))
   expect_that(a, equals(b))
 })
+
+test_that('I should be able to submit a formula rather than separate x and y.', {
+  expect_that(1, equals(1), info = 'I should be able to send a formula.')
+  expect_that(1, equals(1), info = 'I should be able to send a data parameter with the formula.')
+})
+
+test_that('I should be able to specify columns from a data frame rather than separate vectors.', {
+  a <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), recipe = c(flour = 2, water = 3))
+  b <- gastronomify(x = 'vs', y = 'mpg', group = 'am', data = mtcars, recipe = c(flour = 2, water = 3))
+  expect_that(a, equals(b))
+})
+
+test_that('The guacamole recipe should be the default', {
+  a <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am))
+  a <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), guacamole)
+  expect_that(a, equals(b))
+})
