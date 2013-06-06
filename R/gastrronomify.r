@@ -45,7 +45,7 @@ guacamole <- function(x, y, z, data, inflation = 10) {
 }
 
 
-gastronomify <- function(x, y, group, recipe, inflation = 10) {
+gastrronomify <- function(x, y, group, recipe, inflation = 10) {
   data = data.frame(
     x = x,
     y = y,
