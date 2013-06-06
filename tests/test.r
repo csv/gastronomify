@@ -1,4 +1,6 @@
 library(testthat)
+library(plyr)
+library(reshape2)
 source('../R/gastronomify.r')
 
 test_that('The mean recipe should be the base recipe.', {
@@ -13,6 +15,13 @@ test_that('The mean recipe should be the base recipe.', {
 })
 
 test_that('This particular recipe should match.', {
+  recipe = c(foo = 2, bar = 1, baz = 1)
+  observed = gastronomify(
+    x = c(2007, 2007, 2007, 2008, 2008, 2008),
+    y = c(8, 9, 6, 2, 12, 5),
+    group = factor(c('red', 'blue', 'green', 'red', 'blue',  'green')),
+    recipe = recipe
+  )
   expected = data.frame(
     x = c(2007, 2008),
     foo = c(1.714286, 2.285714),
