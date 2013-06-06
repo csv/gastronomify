@@ -1,8 +1,11 @@
+#' @docType package
+#'
+#' @import reshape2 plyr
+
 # Inflate the variation
 .inflate <- function(df, x) {
   1 + (x * (df - 1))
 }
-
 
 #' Turn some data into food.
 #'
@@ -14,8 +17,14 @@
 #'   levels in `group`
 #' @export
 #' @examples
-#' gastronomify(x = ChickWeight$Diet, y = ChickWeight$Weight, group = ChickWeight$Time,
-#'   recipe = rnorm(length(unique(ChickWeight$Time)), mean = 10))
+#' recipe =  c(apples = 3, bananas = 1, cherries = 12, grapes = 14,
+#'   kiwis = 2, lemons = 0.5, mangos = 1, nectarines = 2, oranges = 2,
+#'   pineapples = 0.5, raspberries = 8, watermelons = 0.25)
+#' gastronomify(
+#'   x = paste('Diet', ChickWeight$Diet),
+#'   y = ChickWeight$weight,
+#'   group = paste(ChickWeight$Time, 'days'),
+#'   recipe = recipe)
 #' @return data.frame
 gastronomify <- function(x, y, group, recipe, inflation = 10) {
   data = data.frame(
@@ -24,7 +33,7 @@ gastronomify <- function(x, y, group, recipe, inflation = 10) {
     group = group
   )
 
-  data.normalized <- dcast(data, x ~ group, value.var = 'y')
+  data.normalized <- dcast(data, x ~ group, value.var = 'y', fun.aggregate = mean)
   data.normalized[-1] <- data.frame(lapply(data.normalized[-1], function(vec) { vec / mean(vec) }))
   # data.normalized[-1] <- .inflate(data[-1], inflation)
 
