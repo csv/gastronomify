@@ -27,6 +27,7 @@
 #'     group = paste(ChickWeight$Time, 'days'),
 #'     recipe = fruit.salad)
 #' print(data.fruit.salad)
+#' print(gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), recipe = c(flour = 2, water = 3)))
 gastronomify <- function(x, y, group, recipe, inflation = 10) {
   #
   # Check inputs
