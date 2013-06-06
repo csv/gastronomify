@@ -12,7 +12,7 @@ handle <- function() {
 }
 
 #' Submit a task to taskrabbit.
-taskrabbit <- function(email, password, price, lng, lat, name, description, freeform.address = '', datetime = Sys.time()) {
+taskrabbit <- function(email, password, price, freeform.address, lng, lat, name, description, datetime = Sys.time()) {
   curl <- handle()
   text <- httpGET('https://www.taskrabbit.com/p/tasks/new', curl = curl)
   
