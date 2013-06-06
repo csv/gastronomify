@@ -12,7 +12,7 @@ handle <- function() {
 }
 
 #' Submit a task to taskrabbit.
-taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', datetime = Sys.time()) {
+taskrabbit <- function(email, password, price, lng, lat, name, description, freeform.address = '', datetime = Sys.time()) {
   curl <- handle()
   text <- httpGET('https://www.taskrabbit.com/p/tasks/new', curl = curl)
   
@@ -32,7 +32,7 @@ taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', 
     'utf8' = '✓',
     'authenticity_token' = auth.token(text),
     'task[id]' = '',
-    'task[name]' = 'Not really a task',
+    'task[name]' = name,
     'task[category_id]' = '999',
     'task[start_end]' = 'finish_by',
     'extra[datepicker]' = strftime(datetime, format = '%A %B %d'),
@@ -48,10 +48,9 @@ taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', 
     'task[locations_attributes][0][id]' = '',
     'task[review_runners]' = 'false',
     'task[named_price]' = price,
-    'task[description]' = description,
+    'task[description]' = description
   )
   text <- postForm('https://www.taskrabbit.com/p/tasks', .params = params, curl=curl)
-  # And then pick this out and return it.
-  # <h3 class="eventTitle"><a href="https://www.taskrabbit.com/noma-san-francisco/t/not-really-a-task">Not really a task</a></h3>
-  'https://...'
+  doc <- htmlParse(text, asText = TRUE)
+  xpathApply(doc, '//h3[@class="eventTitle"][position()=1]/a', xmlAttrs)[[1]]['href'][[1]]
 }
