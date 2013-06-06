@@ -15,17 +15,17 @@
 #' @param recipe named vector where each name is an ingredient and each
 #'   element is its quantity; its length must be the same as the number of
 #'   levels in `group`
+#' @return data.frame
 #' @export
 #' @examples
-#' recipe =  c(apples = 3, bananas = 1, cherries = 12, grapes = 14,
-#'   kiwis = 2, lemons = 0.5, mangos = 1, nectarines = 2, oranges = 2,
-#'   pineapples = 0.5, raspberries = 8, watermelons = 0.25)
-#' gastronomify(
-#'   x = paste('Diet', ChickWeight$Diet),
-#'   y = ChickWeight$weight,
-#'   group = paste(ChickWeight$Time, 'days'),
-#'   recipe = recipe)
-#' @return data.frame
+#'   recipe =  c(apples = 3, bananas = 1, cherries = 12, grapes = 14,
+#'     kiwis = 2, lemons = 0.5, mangos = 1, nectarines = 2, oranges = 2,
+#'     pineapples = 0.5, raspberries = 8, watermelons = 0.25)
+#'   gastronomify(
+#'     x = paste('Diet', ChickWeight$Diet),
+#'     y = ChickWeight$weight,
+#'     group = paste(ChickWeight$Time, 'days'),
+#'     recipe = recipe)
 gastronomify <- function(x, y, group, recipe, inflation = 10) {
   #
   # Check inputs

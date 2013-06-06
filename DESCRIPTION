@@ -12,4 +12,4 @@ Imports:
     reshape2
 Collate:
     'gastronomify.r'
-    'guacamole.r'
+    'recipes.r'

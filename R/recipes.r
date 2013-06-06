@@ -1,12 +1,13 @@
 #' A guacamole recipe from http://www.theyummylife.com/guacamole
 #'
+#' @return vector
 #' @export
+#' @examples
 #' gastronomify(
 #'   x = paste('Diet', ChickWeight$Diet),
 #'   y = ChickWeight$weight,
 #'   group = paste(ChickWeight$Time, 'days'),
 #'   recipe = guacamole)
-#' @return vector
 guacamole <- c(
   avocados =              4,   # ripe medium-size avocados; Haas recommended, if available
   garlic.powder.tsp =     1/2, # teaspoon garlic powder
