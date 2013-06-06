@@ -27,6 +27,24 @@
 #'   recipe = recipe)
 #' @return data.frame
 gastronomify <- function(x, y, group, recipe, inflation = 10) {
+  #
+  # Check inputs
+  #
+
+  # Recipe names
+  if (is.null(names(recipe))) {
+    stop('Recipe must have ingredient names, not just quantities.')
+  }
+
+  # Recipe length
+  n <- length(unique(x))
+  if (n >= 1) {
+    truncated.recipe <- recipe[1:length(unique(x))]
+    rm('recipe')
+  } else {
+    stop('Recipe must have at least one ingredient.')
+  }
+
   data = data.frame(
     x = x,
     y = y,
@@ -37,8 +55,10 @@ gastronomify <- function(x, y, group, recipe, inflation = 10) {
   data.normalized[-1] <- data.frame(lapply(data.normalized[-1], function(vec) { vec / mean(vec) }))
   # data.normalized[-1] <- .inflate(data[-1], inflation)
 
-  data.recipe <- ddply(data.normalized, 'x', function(df) {df[1,-1] * recipe})
-  colnames(data.recipe)[-1] <- paste(names(recipe), ' (', colnames(data.recipe[-1]), ')', sep = '')
+  data.recipe <- ddply(data.normalized, 'x', function(df) {df[1,-1] * truncated.recipe})
+  colnames(data.recipe)[-1] <- paste(names(truncated.recipe), ' (', colnames(data.recipe[-1]), ')', sep = '')
 
-  data.recipe
+  # Remove the x column
+  rownames(data.recipe) <- data.recipe[,1]
+  data.recipe <- data.recipe[-1]
 }
