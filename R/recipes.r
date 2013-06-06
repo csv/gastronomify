@@ -21,3 +21,13 @@ guacamole <- c(
   small.white.onion     = 1/2, # finely diced
   medium.tomato         = 1    # deseeded & chopped in 1/4" pieces
 )
+
+#' A Fool's Gold Loaf recipe from http://en.wikipedia.org/wiki/Fool's_Gold_Loaf
+#' 
+#' @return vector
+#' @export
+fools.gold.loaf <- c(
+  creamy.peanut.butter.jars = 1,
+  grape.jelly.jars          = 1,
+  bacon.pounds              = 1
+)
