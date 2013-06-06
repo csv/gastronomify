@@ -1,0 +1,7 @@
+Package: gastrronomify
+Title: Gastronomify a data frame.
+Description: Convert a data frame into food.
+Version: 0.1
+Author: Thomas Levine <wildebeest@thomaslevine.com>
+Maintainer: Thomas Levine <wildebeest@thomaslevine.com>
+License: MIT
