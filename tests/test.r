@@ -2,7 +2,7 @@ library(testthat)
 library(plyr)
 library(reshape2)
 source('../R/gastronomify.r')
-
+# Switch to this: https://github.com/hadley/devtools/wiki/Testing
 
 recipe = c(foo = 2, bar = 1, baz = 1)
 fake.recipe.observed = gastronomify(
