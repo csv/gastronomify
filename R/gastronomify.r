@@ -38,15 +38,7 @@ gastronomify <- function(x, y, group, data = NULL, recipe = guacamole, inflation
     stop('Recipe must have ingredient names, not just quantities.')
   }
 
-  # Recipe length
-  n <- length(levels(factor(group)))
-  if (n >= 1) {
-    truncated.recipe <- recipe[1:n]
-    rm('recipe')
-  } else {
-    stop('Recipe must have at least one ingredient.')
-  }
-
+  # Handle the presence or lack of a data parameter.
   if (is.null(data)) {
     data.sliced = data.frame(
       x = x,
@@ -60,6 +52,16 @@ gastronomify <- function(x, y, group, data = NULL, recipe = guacamole, inflation
     data.sliced$group <- paste(group, data.sliced$group)
   }
   rm('data','x','y','group')
+
+  # Recipe length
+  n <- length(levels(factor(data.sliced$group)))
+  if (n >= 1) {
+    truncated.recipe <- recipe[1:n]
+    rm('recipe')
+  } else {
+    stop('Recipe must have at least one ingredient.')
+  }
+
 
   # Convert the data so that the central value is 1.
   data.normalized <- dcast(data.sliced, x ~ group, value.var = 'y', fun.aggregate = mean)
