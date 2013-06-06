@@ -1,4 +1,4 @@
-Package: gastrronomify
+Package: gastronomify
 Title: Gastronomify a data frame.
 Description: Convert a data frame into food.
 Version: 0.1
