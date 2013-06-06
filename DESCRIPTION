@@ -5,4 +5,8 @@ Version: 0.1
 Author: Thomas Levine <wildebeest@thomaslevine.com>
 Maintainer: Thomas Levine <wildebeest@thomaslevine.com>
 License: MIT
-Imports: plyr, reshape2
+Imports:
+    plyr,
+    reshape2
+Collate:
+    'gastronomify.r'

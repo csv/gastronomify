@@ -68,6 +68,7 @@ guacamole <- function(x, y, z, data, inflation = 10) {
 #' @examples
 #' gastronomify(x = ChickWeight$Diet, y = ChickWeight$Weight, group = ChickWeight$Time,
 #'   recipe = rnorm(length(unique(ChickWeight$Time)), mean = 10))
+#' @return data.frame
 gastronomify <- function(x, y, group, recipe, inflation = 10) {
   data = data.frame(
     x = x,
