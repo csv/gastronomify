@@ -1,5 +1,7 @@
 Package: gastronomify
+Type: Package
 Title: Gastronomify a data frame.
+Date: 2013-06-06
 Description: Convert a data frame into food.
 Version: 0.1
 Author: Thomas Levine <wildebeest@thomaslevine.com>
@@ -10,3 +12,4 @@ Imports:
     reshape2
 Collate:
     'gastronomify.r'
+    'guacamole.r'
