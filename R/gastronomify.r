@@ -37,9 +37,9 @@ gastronomify <- function(x, y, group, recipe, inflation = 10) {
   }
 
   # Recipe length
-  n <- length(unique(x))
+  n <- length(levels(factor(group)))
   if (n >= 1) {
-    truncated.recipe <- recipe[1:length(unique(x))]
+    truncated.recipe <- recipe[1:n]
     rm('recipe')
   } else {
     stop('Recipe must have at least one ingredient.')
