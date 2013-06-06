@@ -1,4 +1,7 @@
-# Dishes from here http://www.gutenberg.org/files/10011/10011-h/10011-h.htm
+#' Dishes from here http://www.gutenberg.org/files/10011/10011-h/10011-h.htm
+#'
+#' @export
+#' @return list
 dishes <- list(
   'Jan 01' = list(
     ingredients = c(

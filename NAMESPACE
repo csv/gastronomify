@@ -1,3 +1,4 @@
+export(dishes)
 export(fools.gold.loaf)
 export(gastronomify)
 export(guacamole)
