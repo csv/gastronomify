@@ -44,3 +44,9 @@ test_that('Fruit salad should work.', {
     recipe = recipe)
   expect_that(as.vector(colMeans(observed[-1])), equals(as.vector(recipe)))
 })
+
+test_that('If there are more items in the recipe than levels, truncate the recipe.', {
+  a <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), recipe = c(flour = 2, water = 3))
+  b <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), recipe = c(flour = 2, water = 3, oil = 0.5))
+  expect_that(a, equals(b))
+})
