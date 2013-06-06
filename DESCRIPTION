@@ -13,3 +13,5 @@ Imports:
 Collate:
     'gastronomify.r'
     'recipes.r'
+    'gutenberg.365.foreign.dishes.r'
+    'taskrabbit.r'

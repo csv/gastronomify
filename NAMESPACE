@@ -1,3 +1,4 @@
+export(fools.gold.loaf)
 export(gastronomify)
 export(guacamole)
 import(plyr)
