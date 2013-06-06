@@ -3,6 +3,19 @@ library(plyr)
 library(reshape2)
 source('../R/gastronomify.r')
 
+test_that('The result should be structured properly', {
+  recipe = c(foo = 2, bar = 1, baz = 1)
+  observed = gastronomify(
+    x = c(2007, 2007, 2007, 2008, 2008, 2008),
+    y = c(8, 9, 6, 2, 12, 5),
+    group = factor(c('red', 'blue', 'green', 'red', 'blue',  'green')),
+    recipe = recipe
+  )
+  expect_that(dim(observed), equals(c(2, 3)))
+  expect_that(rownames(observed), equals(2007:2008))
+  expect_that(colnames(observed), equals(c('foo (red)', 'bar (blue)', 'baz (green)')))
+})
+
 test_that('The mean recipe should be the base recipe.', {
   recipe = c(foo = 2, bar = 1, baz = 1)
   observed = gastronomify(
