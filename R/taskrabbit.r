@@ -12,6 +12,7 @@ handle <- function() {
 }
 
 #' Submit a task to taskrabbit.
+taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', datetime = '') {
   curl <- handle()
   text <- httpGET('https://www.taskrabbit.com/p/tasks/new', curl = curl)
   
@@ -20,8 +21,8 @@ handle <- function() {
     utf8 = '✓',
     authenticity_token = auth.token(text),
     after_auth = '/p/tasks/new',
-    'user_session[email]' = EMAIL,
-    'user_session[password]' = PASSWORD,
+    'user_session[email]' = email,
+    'user_session[password]' = password,
     commit = 'Log in'
   )
   text <- postForm('https://www.taskrabbit.com/user_session', .params = params, curl=curl)
@@ -40,12 +41,16 @@ handle <- function() {
     'task[patron_flow]' = 'general',
     'task[time]' = '',
     'task[locations_attributes][0][freeform_address]' = 'Mission Dolores Park, San Francisco, CA, United States',
-    'task[locations_attributes][0][lat]' = '37.79165709999999',
-    'task[locations_attributes][0][lng]' = '-122.394419',
+    'task[locations_attributes][0][lat]' = lat,
+    'task[locations_attributes][0][lng]' = lng,
     'task[locations_attributes][0][parent_id]' = '',
     'task[locations_attributes][0][id]' = '',
     'task[review_runners]' = 'false',
-    'task[named_price]' = '1',
-    'task[description]' = 'Make me a tasty sandwich.'
+    'task[named_price]' = price,
+    'task[description]' = description,
   )
   text <- postForm('https://www.taskrabbit.com/p/tasks', .params = params, curl=curl)
+  # And then pick this out and return it.
+  # <h3 class="eventTitle"><a href="https://www.taskrabbit.com/noma-san-francisco/t/not-really-a-task">Not really a task</a></h3>
+  'https://...'
+}
