@@ -41,7 +41,7 @@ taskrabbit <- function(email, password, price, lng, lat, freeform.address = '', 
     'task[datetime]' = strftime(datetime, format = '%a %b %d %Y %H:%M:%S GMT-0800 (PST)'), # only works in PST
     'task[patron_flow]' = 'general',
     'task[time]' = '',
-    'task[locations_attributes][0][freeform_address]' = 'Mission Dolores Park, San Francisco, CA, United States',
+    'task[locations_attributes][0][freeform_address]' = freeform.address,
     'task[locations_attributes][0][lat]' = lat,
     'task[locations_attributes][0][lng]' = lng,
     'task[locations_attributes][0][parent_id]' = '',
