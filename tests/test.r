@@ -68,3 +68,18 @@ test_that('The guacamole recipe should be the default', {
 # b <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), guacamole)
 # expect_that(a, equals(b))
 })
+
+
+test_that('.inflate should work.', {
+  a <- .inflate(iris[-5], 2)
+  b <- .inflate(iris[-5], 100)
+  print(head(a))
+  print(head(b))
+  expect_false(all(a == b), info = 'Changing the x should change the result.')
+})
+
+test_that('The inflation keyword should work', {
+  a <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), inflation = 2)
+  b <- gastronomify(x = paste('vs', mtcars$vs), y = mtcars$mpg, group = paste('am', mtcars$am), inflation = 100)
+  expect_false(all(a == b), info = 'Changing the inflation parameter should change the result.')
+})

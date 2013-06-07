@@ -4,7 +4,13 @@
 
 # Inflate the variation
 .inflate <- function(df, x) {
-  1 + (x * (df - 1))
+  as.data.frame(lapply(df, function(column) {
+    mu.bar <- mean(column)
+    sd.bar <- sd(column)
+    sd <- sd.bar * x
+    zscore <- (column - mu.bar) / sd.bar
+    (zscore * sd) + mu.bar
+  }))
 }
 
 #' Turn some data into food.
@@ -72,7 +78,7 @@ gastronomify <- function(x, y, group, data = NULL, recipe = guacamole, inflation
   colnames(data.recipe)[-1] <- paste(names(truncated.recipe), ' (', colnames(data.recipe[-1]), ')', sep = '')
 
   # Inflate the variance
-  data.normalized[-1] <- .inflate(data.recipe[-1], inflation)
+  data.recipe[-1] <- .inflate(data.recipe[-1], inflation)
 
   # Remove the x column
   rownames(data.recipe) <- data.recipe[,1]
