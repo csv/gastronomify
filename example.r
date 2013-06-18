@@ -6,7 +6,9 @@ data.fruit.salad <- gastronomify(
   x = paste('Diet', ChickWeight$Diet),
   y = ChickWeight$weight,
   group = paste(ChickWeight$Time, 'days'),
-  recipe = fruit.salad)
+  recipe = fruit.salad,
+  inflation = 2
+)
 
 food.names <- sapply(colnames(data.fruit.salad), function(name) { strsplit(name, ' ')[[1]][1] })
 recipes <- sapply(rownames(data.fruit.salad), function(diet) {
@@ -16,8 +18,15 @@ recipes <- sapply(rownames(data.fruit.salad), function(diet) {
   recipe
 })
 
-
-
+description <- paste(
+  paste('There are', nrow(data.fruit.salad), 'fruit salad recipes below.'),
+  'They are named\n',
+  paste('* ', rownames(data.fruit.salad), '\n', collapse = ''),
+  '\nPlease make each recipe in a separate bowl. Label each bowl according to its recipe, and deliver the food to the specified place and time.\n',
+  'The recipes follow.\n\n',
+  paste(recipes, collapse = '\n\n\n'), '\n',
+  sep = ''
+)
 
 # taskrabbit(
 #   email = Sys.getenv('TASKRABBIT_EMAIL'),
