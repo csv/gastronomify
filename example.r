@@ -1,3 +1,5 @@
+library(gastronomify)
+
 fruit.salad  <-  c(apples = 3, bananas = 1, cherries = 12, grapes = 14,
                    kiwis = 2, lemons = 0.5, mangos = 1, nectarines = 2, oranges = 2,
                    pineapples = 0.5, raspberries = 8, watermelons = 0.25)
@@ -30,10 +32,10 @@ description <- paste(
   sep = ''
 )
 
-# taskrabbit(
-#   email = Sys.getenv('TASKRABBIT_EMAIL'),
-#   password = Sys.getenv('TASKRABBIT_PASSWORD'),
-#   price,
-#   freeform.address, lng, lat,
-#   name, description, datetime = Sys.time()
-# )
+taskrabbit(
+  email = Sys.getenv('TASKRABBIT_EMAIL'),
+  password = Sys.getenv('TASKRABBIT_PASSWORD'),
+  price,
+  freeform.address, lng, lat,
+  name, description, datetime = Sys.time()
+)
