@@ -32,7 +32,7 @@ description <- paste(
   sep = ''
 )
 
-taskrabbit.href <- taskrabbit(
+taskrabbit.result <- taskrabbit(
   email = Sys.getenv('TASKRABBIT_EMAIL'),
   password = Sys.getenv('TASKRABBIT_PASSWORD'),
   price = 1,

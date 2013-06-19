@@ -57,5 +57,9 @@ taskrabbit <- function(email, password, price, freeform.address, lng, lat, name,
   )
   text <- postForm('https://www.taskrabbit.com/p/tasks', .params = params, curl=curl)
   doc <- htmlParse(text, asText = TRUE)
-  xpathApply(doc, '//h3[@class="eventTitle"][position()=1]/a', xmlAttrs)[[1]]['href'][[1]]
+  href <- xpathApply(doc, '//h3[@class="eventTitle"][position()=1]/a', xmlAttrs)[[1]]['href'][[1]]
+  list(
+    html = text,
+    href = href
+  )
 }
