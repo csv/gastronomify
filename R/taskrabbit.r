@@ -41,7 +41,7 @@ taskrabbit <- function(email, password, price, freeform.address, lng, lat, name,
     'extra[datepicker]' = strftime(datetime, format = '%A %B %d'),
     'task[date]' = strftime(datetime, format = '%A %B %d'),
   # 'task[datetime]' = strftime(datetime, format = '%a %b %d %Y %H:%M:%S GMT%z (%Z)'),
-    'task[datetime]' = strftime(datetime, format = '%a %b %d %Y %H:%M:%S GMT-0800 (PST)'), # only works in PST
+    'task[datetime]' = strftime(datetime, format = '%a %b %d %Y %H:%M:%S GMT+0000 (GMT)'),
     'task[patron_flow]' = 'general',
     'task[time]' = '',
     'task[locations_attributes][0][freeform_address]' = freeform.address,
