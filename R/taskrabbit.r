@@ -1,4 +1,4 @@
-#' @import XML
+#' @import XML RCurl
 
 # Find the authenticity_token in the page.
 auth.token <- function(text) {
