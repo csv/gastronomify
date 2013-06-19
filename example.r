@@ -32,7 +32,7 @@ description <- paste(
   sep = ''
 )
 
-taskrabbit(
+taskrabbit.href <- taskrabbit(
   email = Sys.getenv('TASKRABBIT_EMAIL'),
   password = Sys.getenv('TASKRABBIT_PASSWORD'),
   price = 1,
@@ -43,7 +43,7 @@ Cambridge, MA 02139
 ', 
   lng = -71.0938,
   lat = 42.359706,
-  name = 'Make guacamole according to some precise recipes.',
+  name = 'Make fruit salad according to some precise recipes.',
   description = description,
   datetime = as.POSIXct('2013-06-23 08:00', tz = 'ET')
 )
