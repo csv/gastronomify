@@ -1,3 +1,5 @@
+#' @import XML
+
 #' Find the authenticity_token in the page.
 auth.token <- function(text) {
   doc <- htmlParse(text, asText = TRUE)
@@ -22,7 +24,7 @@ taskrabbit <- function(email, password, price, freeform.address, lng, lat, name,
   # Log in
   params <- list(
     utf8 = '✓',
-    authenticity_token = auth.token(text),
+    'authenticity_token' = auth.token(text),
     after_auth = '/p/tasks/new',
     'user_session[email]' = email,
     'user_session[password]' = password,
