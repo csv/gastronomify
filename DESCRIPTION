@@ -9,7 +9,9 @@ Maintainer: Thomas Levine <wildebeest@thomaslevine.com>
 License: MIT
 Imports:
     plyr,
-    reshape2
+    reshape2,
+    RCurl,
+    XML
 Collate:
     'gastronomify.r'
     'recipes.r'
