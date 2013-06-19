@@ -19,10 +19,12 @@ recipes <- sapply(rownames(data.fruit.salad), function(diet) {
 })
 
 description <- paste(
-  paste('There are', nrow(data.fruit.salad), 'fruit salad recipes below.'),
+  paste('There are', nrow(data.fruit.salad), 'fruit salad recipes below. '),
   'They are named\n',
-  paste('* ', rownames(data.fruit.salad), '\n', collapse = ''),
-  '\nPlease make each recipe in a separate bowl. Label each bowl according to its recipe, and deliver the food to the specified place and time.\n',
+  paste('* ', rownames(data.fruit.salad), '\n', collapse = ''), '\n',
+  'Please make each recipe in a separate bowl.\n',
+  'Label each bowl according to its recipe,\n',
+  'and deliver the food to the specified place and time.\n',
   'The recipes follow.\n\n',
   paste(recipes, collapse = '\n\n\n'), '\n',
   sep = ''
