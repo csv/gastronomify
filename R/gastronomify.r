@@ -83,4 +83,5 @@ gastronomify <- function(x, y, group, data = NULL, recipe = guacamole, inflation
   # Remove the x column
   rownames(data.recipe) <- data.recipe[,1]
   data.recipe <- data.recipe[-1]
+  data.recipe
 }
